@@ -1,0 +1,48 @@
+
+<?php
+$posts = $block->GetBlog();
+?>
+<a href="<?= $block->getThemData() ?>">+ Add data</a><br>
+<a href="<?= $block->getAjaxAdd() ?>">+Add data AJAX</a>
+<table>
+    <tr>
+        <th class="id">Id</th>
+        <th class="name">Name</th>
+        <th class="title">Title</th>
+        <th class="title">Edit</th>
+        <th class="title">Delete</th>
+
+
+
+    </tr>
+    <?php
+    foreach ($posts as $data){?>
+        <tr>
+                    <td><?= $data->getId()?></td>
+                    <td><?= $data->getName()?></td>
+                    <td><?= $data->getTitle()?></td>
+                    <td><a href="<?= $block->getEditData() ?>id/<?= $data->getId() ?>">Edit</a>
+                        <a href="<?= $block->getEditAjax() ?>id/<?= $data->getId() ?>">Edit Ajax</a></td>
+                    <td><a href="<?= $block->getDelete() ?>id/<?= $data->getId() ?>">Delete</a>
+                        <a class="deleteAjax" data-id="<?= $data->getId() ?>">Delete Ajax</a></td>
+                  </tr>
+    <?php }
+    ?>
+</table>
+<script>
+    require(['jquery'],function($){
+        $('.deleteAjax').click(function (e){
+            e.preventDefault();
+            //var el = this;
+            var id = $(this).data('id');
+           // alert(id)
+            var url = "<?= $block->getDelete() ?>id/"+id;
+            jQuery.ajax({
+                url: url,
+                type: "GET",
+                data: {id:id},
+                showLoader: true,
+            });
+        });
+    });
+</script>

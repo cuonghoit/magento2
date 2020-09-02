@@ -1,0 +1,26 @@
+<a href="<?= $block->getView() ?>">View list data</a>
+<h3 style="text-align: center;">ADD DATA AJAX</h3>
+<form method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" placeholder="..." required>
+    <label for="title">Title:</label>
+    <input  type="text" name="title" placeholder="..." required>
+    <button name="addAjax" id="addAjax">ADD AJAX</button>
+</form>
+
+<script>
+    require(['jquery'],function($){
+        $('#addAjax').click(function (e){
+            e.preventDefault();
+            var name = $("input[name='name']").val();
+            var title = $("input[name='title']").val();
+            var url = "<?= $block->getFormAjax() ?>";
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: {name:name,title:title},
+                showLoader: true,
+            });
+        });
+    });
+</script>

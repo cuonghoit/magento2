@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var \Learning\HelloWorld\Block\Display $block
+ */
+?>
+<a href="<?= $block->getView() ?>">view list data</a>
+<h3 style="text-align: center;">EDIT DATA</h3>
+<form action="<?= $block->getFormEditAjax() ?>" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="<?= $block->getSuaAjax()->getName() ?>" required>
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="<?= $block->getSuaAjax()->getTitle() ?>" required>
+    <button name="editAjax" id="editAjax">EDIT AJAX</button>
+</form>
+<script>
+    require(['jquery'],function($){
+        $('#editAjax').click(function (e){
+            e.preventDefault();
+            var name = $("input[name='name']").val();
+            var title = $("input[name='title']").val();
+            var url = "<?= $block->getFormEditAjax() ?>";
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: {name:name,title:title},
+                showLoader: true,
+            });
+        });
+    });
+</script>

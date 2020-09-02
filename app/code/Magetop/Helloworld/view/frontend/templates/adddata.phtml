@@ -1,0 +1,13 @@
+
+<?php
+$posts = $block->getBlog();
+?>
+<a href="<?= $block->getView() ?>">view list data</a>
+<h1 style="text-align: center">ADD DATA CONTROLLER</h1>
+<form action="<?= $block->getFormData() ?>" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" placeholder="" required>
+    <label for="title">Title:</label>
+    <input type="text" name="title" placeholder="" required>
+    <input type="submit" value="ADD">
+</form>
